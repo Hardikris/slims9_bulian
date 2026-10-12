@@ -162,10 +162,11 @@ if (!$reportView) {
         'vc.member_name AS \'' . __('Visitor Name') . '\'',
         'IF(mt.member_type_name IS NOT NULL, mt.member_type_name, \'NON-MEMBER\') AS \'' . __('Membership Type') . '\'',
         'mr.name AS \'' . __('Room Name') . '\'',
+        'IF(vc.member_id IS NOT NULL, IF(m.gender = 1, \'Male\', \'Female\'), \'NA\') AS \''.__('Gender').'\'',
         'vc.institution AS \'' . __('Institution') . '\'',
         'vc.checkin_date AS \'' . __('Visit Date') . '\''
     );
-    $reportgrid->setSQLorder('vc.member_id ASC');
+    $reportgrid->setSQLorder('vc.checkin_date DESC');
 
     // is there any search
     $criteria = 'vc.visitor_id IS NOT NULL ';
@@ -212,6 +213,7 @@ if (!$reportView) {
     $xlsquery = 'SELECT IF(vc.member_id IS NOT NULL, vc.member_id, \'NON-MEMBER\')  AS \'' . __('Member ID') . '\'' .
         ', vc.member_name AS \'' . __('Visitor Name') . '\'' .
         ', IF(mt.member_type_name IS NOT NULL, mt.member_type_name, \'NON-MEMBER\') AS \'' . __('Membership Type') . '\'' .
+        ', IF(vc.member_id IS NOT NULL, IF(m.gender = 1, \'Male\', \'Female\'), \'NA\') AS \''.__('Gender').'\''.
         ', vc.institution AS \'' . __('Institution') . '\'' .
         ', mr.name AS \'' . __('Room Name') . '\'' .
         ', vc.checkin_date AS \'' . __('Visit Date') . '\'' .
