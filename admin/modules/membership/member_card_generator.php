@@ -46,7 +46,7 @@ if (!$can_read) {
 }
 
 // local settings
-$max_print = 10;
+$max_print = 70;
 
 // clean print queue
 if (isset($_GET['action']) AND $_GET['action'] == 'clear') {
@@ -134,7 +134,7 @@ if (isset($_GET['action']) AND $_GET['action'] == 'print') {
 
 	$member_q = $dbs->query('SELECT m.member_name, m.member_id, m.member_image, m.member_address, m.member_email, m.inst_name, m.postal_code, m.pin, m.member_phone, m.expire_date, m.register_date, mt.member_type_name FROM member AS m
         LEFT JOIN mst_member_type AS mt ON m.member_type_id=mt.member_type_id
-        WHERE m.member_id IN('.$member_ids.')');
+        WHERE m.member_id IN('.$member_ids.') ORDER BY m.member_name');
     $member_datas = array();
     while ($member_d = $member_q->fetch_assoc()) {
         if ($member_d['member_id']) {
@@ -255,7 +255,7 @@ $datagrid->column_width = array('10%', '70%', '15%');
 // set checkbox action URL
 $datagrid->chbox_form_URL = $_SERVER['PHP_SELF'];
 // put the result into variables
-$datagrid_result = $datagrid->createDataGrid($dbs, $table_spec, 20, $can_read);
+$datagrid_result = $datagrid->createDataGrid($dbs, $table_spec, 14, $can_read);
 if (isset($_GET['keywords']) AND $_GET['keywords']) {
     echo '<div class="infoBox">'.__('Found').' '.$datagrid->num_rows.' '.__('from your search with keyword').': "'.htmlspecialchars($_GET['keywords']).'"</div>'; //mfc
 }

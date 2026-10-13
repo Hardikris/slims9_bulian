@@ -92,7 +92,7 @@ $sysconf['print']['membercard']['template'] = 'classic';
 /* measurement in cm */
 $sysconf['print']['membercard']['page_margin'] = 0.2;
 $sysconf['print']['membercard']['items_margin'] = 0.1;
-$sysconf['print']['membercard']['items_per_row'] = 1; //
+$sysconf['print']['membercard']['items_per_row'] = 2; //
 
 // by Jushadi Arman Saz
 /* measurement in cm*/

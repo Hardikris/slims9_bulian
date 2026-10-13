@@ -38,6 +38,7 @@ $menu['bibliography.p2p-service'] = array(__('P2P Service'), MWB.'bibliography/p
 $menu['bibliography.header-tools'] = array('Header', __('TOOLS'));
 $menu['bibliography.labels-printing'] = array(__('Labels Printing'), MWB.'bibliography/dl_print.php', __('Print Document Labels'));
 $menu['bibliography.item-barcodes-printing'] = array(__('Item Barcodes Printing'), MWB.'bibliography/item_barcode_generator.php', __('Print Item Barcodes'));
+$menu['bibliography.barcodes-labels-printing'] = array(__('Barcodes & Labels Printing'), MWB.'bibliography/item_barcode_label_print.php', __('Print Item Barcodes and Labels'));
 $menu['bibliography.marc-export'] = array(__('MARC Export'), MWB.'bibliography/marcexport.php', __('Export Bibliographic Data to MARC file'));
 $menu['bibliography.marc-import'] = array(__('MARC Import'), MWB.'bibliography/marcimport.php', __('Import Bibliographic Data from MARC file'));
 $menu['bibliography.catalog-printing'] = array(__('Catalog Printing'), MWB.'bibliography/printed_card.php', __('Print Catalog Card'));

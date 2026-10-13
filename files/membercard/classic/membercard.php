@@ -61,7 +61,7 @@ strong {
 }
 
 #front-card header {
-  padding: 15px 10px;
+  padding: 15px 10px 5px 10px;
   background-color: #fff;
   text-transform: uppercase;
   color: <?php echo $sysconf['print']['membercard']['header_font_color']??'#000'; ?> !important;  
@@ -78,48 +78,29 @@ strong {
 
 #front-card header .brand,
 #front-card header .sub-brand {
-  padding-left: 45px;
+  padding-left: 60px;
 }
 
 #front-card .logo img {
   position: absolute;
-  top: 12px;
+  top: 6px;
 }
 
 .identity {
-  padding: 15px;
+  padding-left: 5px;
+  padding-bottom: 5px;
 }
 
-.identity h1 {
-  max-width: 80%;
-  height: 40px;
+.identity h3 {
+  height: 15px;
+  padding-left: 5px;
   text-transform: uppercase;
-}
-
-.photo {
-  position: absolute;
-  top: 25px;
-  right: 15px;
-  width: 55px;
-  height: 55px;
-  overflow: hidden;
-  border-radius: 5px;
-  border: solid 3px #fff;
-}
-
-.photo img {
-  width: 55px;
-  border-radius: 3px;
 }
 
 .personality {      
   display: flex;
-  margin-top: 5px;
+  margin-top: 1px;
   margin-bottom: 0;
-}
-
-.personality > div {
-  width: 35%;      
 }
 
 #front-card .address {
@@ -165,9 +146,9 @@ strong {
 .barcode {
   text-align: center;
   margin:0;
-  height: 15px;
+  height: 50px;
   overflow: hidden;
-  width: 100px;
+  width: 200px;
   border-top: solid 2px #fff;
   border-bottom: solid 2px #fff;
 }
@@ -177,57 +158,11 @@ strong {
   width: <?php echo $sysconf['print']['membercard']['barcode_scale'] ?>%;
 }
 
-#back-card {
-  background: <?php echo $sysconf['print']['membercard']['b_color']??'#ffffff';  ?> url("<?php echo $card_path.'images/'.$sysconf['print']['membercard']['back_side_image'] ?>") center center no-repeat;
-  background-size: cover;
-}
-
-#back-card .rules {
-  padding: 15px;
-}
-
-#back-card .rules ul {
-  margin-top: 10px;
-  padding: 0 15px;
-}
-
-#back-card .sign {
-  text-align: center;
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-  line-height: 1;
-}
-
-#back-card .signature {
-  width: 35px;
-}
-
-#back-card .stamp {
-  position: absolute;
-  top: 15px;
-  left: 20px;
-  width: 25px;
-}
-
 .librarian,
 .position {
   font-weight: bold;
 }
 
-#back-card footer {
-  position: absolute;
-  padding-left: 15px;
-  bottom: 15px;
-}
-
-#back-card .title {
-  font-weight: 700;
-  text-transform: uppercase;
-}
-#back-card address {
-  font-style: normal;
-}
 .print_btn {
   background: #333;
   padding: 10px 15px;
@@ -251,6 +186,7 @@ strong {
   <tr>
     <?php foreach ($membercard_rows as $card) : ?>
     <td>
+    <div>
     <!-- Frontcard -->
     <section id="front-card">
       <header>
@@ -262,33 +198,15 @@ strong {
       </header>
       <main>
         <div class="identity">
-          <h1><?php echo $card['member_name'] ?></h1>
-          <?php if(($card['member_image'] != '') || (file_exists(SWB.IMG.'/persons/'.$card['member_image']))) : ?>
-          <div class="photo">
-            <img src="<?php echo SWB.IMG ?>/persons/<?php echo $card['member_image'] ?>" alt="">
-          </div>
-          <?php endif ?>
-          <?php if($card['member_address'] != ''): ?>
-          <div class="address">
-            <strong><?php echo __('Address') ?></strong>
-            <p><?php echo $card['member_address'] ?></p>
-          </div>
-          <?php endif ?>
+          <h3><?php echo $card['member_name'] ?></h3>
           <div class="personality">
-            <?php if($card['pin'] != '') : ?>
-            <div class="noid">
-              <strong><?php echo __('Personal ID Number') ?></strong>
-              <p><?php echo $card['pin'] ?></p>
-            </div>
-            <?php endif ?>
-            <?php if($card['member_phone'] != '') : ?>
             <div class="nophone">
-              <strong><?php echo __('Phone Number') ?></strong>
-              <p><?php echo $card['member_phone'] ?></p>
+              <strong><?php echo __('Member ID') ?></strong>
+              <p><?php echo $card['member_id'] ?></p>
+              <strong><?php echo __('Expired') ?></strong>
+              <p><?php echo $card['expire_date'] ?></p>
             </div>
-            <?php endif ?>
             <div class="code">
-              <div class="expired">Exp. <strong><?php echo $card['expire_date'] ?></strong></div>
               <div class="barcode">
                 <img src="<?php echo SWB.IMG.'/barcodes/'.str_replace(array(' '), '_', $card['member_id']) ?>.png" alt="No  Barcode">
               </div>
@@ -298,33 +216,6 @@ strong {
       </main>
     </section>
     <!-- End Frontcard -->
-    </td>
-    <td>
-    <!-- Backcard -->
-    <section id="back-card">
-        <div class="rules">
-          <strong><?php echo __('Library Rules') ?></strong>
-          <?php echo html_entity_decode($sysconf['print']['membercard']['rules']) ?>
-        </div>
-
-        <div class="sign">
-          <div class="time"><?php echo $sysconf['print']['membercard']['city']?>, <?php echo date('d M Y',strtotime($card['register_date'])) ?></div>
-          <div class="position"><?php echo $sysconf['print']['membercard']['title'] ?></div>
-          <img class="signature" src="<?php echo $card_signature ?>" alt="No signature">
-          <img class="stamp" src="<?php echo $card_stamp ?>" alt="No stamp">
-          <div class="librarian"><?php echo $sysconf['print']['membercard']['officials'] ?></div>
-          <div class="uid"><?php echo $sysconf['print']['membercard']['officials_id'] ?></div>
-        </div>
-
-        <footer>
-          <div class="title"><?php echo $sysconf['print']['membercard']['back_header1_text'] ?></div>
-          <address>
-            <?php echo $sysconf['print']['membercard']['back_header2_text'] ?>
-          </address>
-        </footer>
-
-    </section>
-    <!-- End Backcard -->
     </td>
     <?php endforeach ?>
   </tr>
